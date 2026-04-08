@@ -91,6 +91,7 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 	$calcround = 1;
 	while(true){
 		//assign seats with actual divisor
+		echo "while1";
 		foreach($votes as $party => $votecount){
 			$seatcalc[$party]['seats'] = (int) round($votecount / $divisor);
 			if($calcround == 1){
