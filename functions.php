@@ -1,6 +1,6 @@
 <?php
 /*
-fetches party and vote count (providing basic input check)
+fetches party and vote count (providing input check)
 
 returns array with partyname as key and votecount as value or NULL if array is empty
 
@@ -8,7 +8,8 @@ break with empy party
 */
 function input_votes(){
 	$input = array();
-	
+
+	repeat_empty:
 	while(true){
 		$party = readline("Partei: (Enter fuer Beenden) ");
 		if($party == "") break;
@@ -23,7 +24,7 @@ function input_votes(){
 		}
 	}
 
-	if(count($input) > 0) return $input; else return NULL;
+	if(count($input) > 0) return $input; else goto return_empty;
 }
 
 /*
