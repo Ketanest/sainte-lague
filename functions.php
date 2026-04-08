@@ -64,7 +64,8 @@ returns 2-dimensional array with
 	key1 = party (string)
 		key2 =	'seats' (int) => -1 if threshold party 
 				'proportion' (decimal) => initial proportion (with treshold parties)
-				'proportion_new' (decimal) => new proportion (treshold parties removed), -1 if treshold party
+				'proportion_new' (decimal) => new proportion (treshold parties removed), 0 if treshold party
+				'majority_seats' (int) => how many majority seats (if chosen), unset for other parties
 */
 function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 	//calculate proportions and add to array
@@ -73,11 +74,11 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 		$votesum = array_sum($votes);
 		$proportion = $votecount / $votesum;
 		$seatcalc[$party]['proportion'] = $proportion;
-		//if treshold > 0 and party below treshold remove party from $votes and set seats to -1
+		//if treshold > 0 and party below treshold remove party from $votes and set seats to 0
 		if($treshold > 0 && $proportion < ($treshold / 100)){
 			unset($votes[$party]);
 			$seatcalc[$party]['seats'] = 0;
-			$seatcalc[$party]['proportion_new'] = -1;
+			$seatcalc[$party]['proportion_new'] = 0;
 		}
 	}
 	
@@ -107,6 +108,7 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 					if($seatcalc[$majorityparty]['seats'] < ceil(($seats / 2) + 0.1)){
 						$seats += 1;
 						$seatcalc[$majorityparty]['seats'] += 1;
+						$seatcalc[$majorityparty]['majority_seats'] +=1;
 					}else break 2;
 				}
 			}else break;
