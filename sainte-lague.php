@@ -12,7 +12,7 @@ $result = calculate_seats($votes, 69, 0, 0);
 
 $seatcount = 0;
 foreach($result as $party => $value){
-	echo PHP_EOL . $party . " hat " . $value['seats'] . " Sitze bekommen (" . round($value['proportion'] * 100, 2) . " % / . round($value['proportion_new'] * 100, 2) . % der Sitze)" . PHP_EOL;
+	echo PHP_EOL . $party . " hat " . $value['seats'] . " Sitze bekommen (" . round($value['proportion'] * 100, 2) . " % / " . round($value['proportion_new'] * 100, 2) . " % der Sitze)" . PHP_EOL;
 	$seatcount += $value['seats'];
 }
 
