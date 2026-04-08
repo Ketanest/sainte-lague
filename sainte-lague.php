@@ -5,7 +5,15 @@ include("functions.php");
 #$votes = input_votes();
 #$misc = input_misc();
 
-$votes = array("GRUEN" => 990478, "CSU" => 622986, "FDP" => 133257, "SPD" => 189327, "Linke" => 99634);
+$votes = array(
+	"GRUENE" => 5762380,
+	"CDU" => 11196374,
+	"FDP" => 2148757,
+	"SPD" =>  8149124,
+	"AfD" => 10328780,
+	"CSU" => 2964028,
+	"Linke" => 4356532
+);
 $result = calculate_seats($votes, 70, 5, 1);
 
 #$result = calculate_seats($votes, $misc['seats'], $misc['treshold'], $misc['majority']);
