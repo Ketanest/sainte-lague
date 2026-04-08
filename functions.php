@@ -15,10 +15,7 @@ function input_votes(){
 
 		repeat_votes:
 		$votes = (int) readline("Stimmenanzahl: ");
-		if($votes == ""){
-			echo "Keine Eingabe, wiederholen!" . PHP_EOL;
-			goto repeat_votes;
-		} else if($votes < 1){
+		if($votes < 1){
 			echo "Eingabe ungültig (muss eine Zahl größer 0 sein), wiederholen!" . PHP_EOL;
 			goto repeat_votes;
 		} else {
