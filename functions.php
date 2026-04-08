@@ -67,26 +67,22 @@ returns 2-dimensional array with
 				'proportion_new' (decimal) => new proportion (treshold parties removed)
 */
 function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
-	//if treshold > 0 walk through array, remove any party below treshold and add removed party to temporary array
-	$treshold_parties = array();
-	if($treshold > 0){
+	//calculate proportionals and add to array
+	$seatcalc = array();
+	foreach($votes as $party => $votecount){
 		$sum = array_sum($votes);
-		foreach($votes as $party => $votecount){
-			$proportion = $votecount / $sum;
-			if($proportion < ($treshold / 100)){
-				$treshold_parties[$party] = $proportion;
-				unset($votes[$party]);
-			}
-		}
+		$proportion = $votecount / $sum;
+		$seatcalc[$party]['proportion'] = $proportion;
+		//if treshold > 0 and party below treshold remove party from $votes
+		if($treshold > 0 && $proportion < ($treshold / 100)) unset($votes[$party];
 	}
-
+	
 	/*
 	calculate seats
 	*/
 	$votesum = array_sum($votes);
 	echo "Start-Divisor: " . $divisor = $votesum / $seats;
 	$majorityparty = false;
-	$seatcalc = array();
 	$calcround = 1;
 	while(true){
 		//assign seats with actual divisor
