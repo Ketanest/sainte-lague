@@ -73,7 +73,7 @@ function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority =
 			$proportion = $votecount / $sum;
 			if($proportion < $treshold / 100){
 				$treshold_parties[$party] = $proportion;
-				 unset($votes[$party]);
+				unset($votes[$party]);
 			}
 		}
 	}
