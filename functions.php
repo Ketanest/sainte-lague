@@ -60,7 +60,7 @@ treshold (optional, default: false): removes party not meeting the threshold
 majority (optional, default: false): more than 50 % of votes results mandatory in more than 50 % of the seats (increases seats if necessary)
 */
 function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority = 0){
-	//if treshodl > 0 walk through array and remove any party below treshold
+	//if treshold > 0 walk through array, remove any party below treshold and add removed party to temporary array
 	$treshold_parties = array();
 	if($treshold > 0){
 		$sum = array_sum($votes);
@@ -73,13 +73,17 @@ function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority =
 		}
 	}
 
-	//calculate seats
+	/*
+	calculate seats
+	returns 2-dimensional array with [key1 = party][key2 = seats and proportion]
+	*/
 	$votesum = array_sum($votes);
 	echo "Start-Divisor: " . $divisor = $votesum / $seats;
 	$majorityparty = false;
 	$seatcalc = array();
 	$calcround = 1;
 	while(true){
+		//assign seats with actual divisor
 		foreach($votes as $party => $votecount){
 			$seatcalc[$party]['seats'] = (int) round($votecount / $divisor);
 			if($calcround == 1){
@@ -88,6 +92,7 @@ function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority =
 				if($seatcalc[$party]['proportion'] > 0.5 && $majority) $majorityparty = $party;
 			}
 		}
+		//check if assigned seats differs from available seat number and increase/decrease divisor if necessary
 		$assigned_seats = array_sum(array_column($seatcalc, 'seats'));
 		if($assigned_seats == $seats){
 			//increase seats if majority (if desired) and seats not majority
@@ -102,6 +107,7 @@ function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority =
 		$calcround += 1;
 	}
 
+	//add seats and proportion from treshold parties
 	foreach($treshold_parties as $party => $proportion){
 		$seatcalc[$party]['seats'] = 0;
 		$seatcalc[$party]['proportion'] = $proportion;
