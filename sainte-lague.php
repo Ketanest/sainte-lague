@@ -14,7 +14,7 @@ $votes = array(
 	"CSU" => 2964028,
 	"Linke" => 4356532
 );
-$result = calculate_seats($votes, 70, 5, 1);
+$result = calculate_seats($votes, 630, 5, 1);
 
 #$result = calculate_seats($votes, $misc['seats'], $misc['treshold'], $misc['majority']);
 
