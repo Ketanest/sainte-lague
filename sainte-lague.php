@@ -2,11 +2,12 @@
 <?php
 
 /*
-fetches party => vote of any number (provides basic input check)
-returns array with partyname as key and votecount as value
+fetches party and vote of any number (providing basic input check)
+returns array with partyname as key and votecount as value or NULL if array is empty
 */
 function input_votes(){
 	$input = array();
+	
 	while(true){
 		$party = readline("Partei: (Enter fuer Beenden) ");
 		if($party == "") break;
@@ -17,7 +18,7 @@ function input_votes(){
 			echo "Keine Eingabe, wiederholen!" . PHP_EOL;
 			goto repeat_votes;
 		} else if(!is_numeric($votes)){
-			echo "Eingabe keine Zahl, wiederholen." . PHP_EOL;
+			echo "Eingabe ist keine Zahl, wiederholen!" . PHP_EOL;
 			goto repeat_votes;
 		} else {
 			$input[$party] = (int) $votes;
@@ -27,6 +28,12 @@ function input_votes(){
 	if(count($input) > 0) return $input; else return NULL;
 }
 
+/*
+fetches miscellaneous options (treshold, seats, majority)
+treshold (percent): integer between 0 and 100 (0 = off, 1-100 = percentage)
+seats (mandatory): integer seats in the parliament
+majority: bool if majority rule is applied (more than 50 % of votes results mandatory in more than 50 % of the seats (increases seats if exactly 50 % )
+*/
 function input_misc(){
 	repeat_treshold:
 	$input['treshold'] = (int) readline("Berücksichtigung einer Prozenthürde? (1-100, 0 für ohne [standard]) ");
