@@ -86,7 +86,7 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 	calculate seats
 	*/
 	$votesum = array_sum($votes);
-	echo "Start-Divisor: " . $divisor = $votesum / $seats;
+	$divisor = $votesum / $seats;
 	$majorityparty = false;
 	$calcround = 1;
 	while(true){
@@ -113,9 +113,9 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 				}
 			}else break;
 		}else if($assigned_seats > $seats){
-			echo "Divisor: " . $divisor += $divisor / 1000;
+			$divisor += $divisor / 1000;
 		}else if($assigned_seats < $seats){
-			echo "Divisor: " . $divisor -= $divisor / 1000;
+			$divisor -= $divisor / 1000;
 		}
 		$calcround += 1;
 	}
