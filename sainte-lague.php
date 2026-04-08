@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-include(functions.php);
+include("functions.php");
 
 #$votes = input_votes();
 #$misc = input_misc();
