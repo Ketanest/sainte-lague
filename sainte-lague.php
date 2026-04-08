@@ -1,6 +1,10 @@
 #!/usr/bin/php
 <?php
 
+/*
+fetches party => vote of any number (provides basic input check)
+returns array with partyname as key and votecount as value
+*/
 function input_votes(){
 	$input = array();
 	while(true){
