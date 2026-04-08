@@ -10,6 +10,8 @@ $result = calculate_seats($votes, 70, 5, 1);
 
 #$result = calculate_seats($votes, $misc['seats'], $misc['treshold'], $misc['majority']);
 
+print_r($result);
+
 $seatcount = 0;
 foreach($result as $party => $value){
 	$seats = $value['seats'];
