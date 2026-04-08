@@ -18,7 +18,7 @@ foreach($result as $party => $value){
 	if(isset($value['majority_seats'])){
 		$majority = ", davon " . $value['majority_seats'] . " Sitze aufgrund der Mehrheitsregel.";
 	}else $majority = "";
-	echo PHP_EOL . "$party hat $seats Sitze bekommen ($proportion % / $proportion_new % der Sitze)" . PHP_EOL;
+	echo PHP_EOL . "$party hat $seats Sitze bekommen ($proportion % / $proportion_new % der Sitze)" . $majority . PHP_EOL;
 	$seatcount += $value['seats'];
 }
 
