@@ -32,7 +32,7 @@ function input_votes(){
 fetches miscellaneous options (treshold, seats, majority)
 treshold (percent): integer between 0 and 100 (0 = off, 1-100 = percentage)
 seats (mandatory): integer seats in the parliament
-majority: bool if majority rule is applied (more than 50 % of votes results mandatory in more than 50 % of the seats (increases seats if exactly 50 % )
+majority: bool if majority rule is applied
 */
 function input_misc(){
 	repeat_treshold:
@@ -54,6 +54,11 @@ function input_misc(){
 	return $input;
 }
 
+/*
+calculates seats proportionally
+treshold (optional, default: false): removes party not meeting the threshold
+majority (optional, default: false): more than 50 % of votes results mandatory in more than 50 % of the seats (increases seats if necessary)
+*/
 function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 	$treshold_parties = array();
 	if($treshold > 0){
