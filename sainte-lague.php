@@ -2,14 +2,13 @@
 <?php
 include("functions.php");
 
-#$votes = input_votes();
-#$misc = input_misc();
+$votes = input_votes();
+$misc = input_misc();
 
-$votes = array("GRUEN" => 991578, "CSU" => 622986, "FDP" => 133257, "SPD" => 189327, "Linke" => 17634);
+#$votes = array("GRUEN" => 991578, "CSU" => 622986, "FDP" => 133257, "SPD" => 189327, "Linke" => 17634);
+#$result = calculate_seats($votes, 69, 0, 0);
 
-$result = calculate_seats($votes, 69, 0, 0);
-
-#$result = calculate_seats($votes, $misc['seats'], $misc['treshold'], $misc['majority']);
+$result = calculate_seats($votes, $misc['seats'], $misc['treshold'], $misc['majority']);
 
 $seatcount = 0;
 foreach($result as $party => $value){
