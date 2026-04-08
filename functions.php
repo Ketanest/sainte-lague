@@ -19,7 +19,7 @@ function input_votes(){
 			echo "Keine Eingabe, wiederholen!" . PHP_EOL;
 			goto repeat_votes;
 		} else if(!is_numeric($votes) || $votes < 1){
-			echo "Eingabe ist keine Zahl, wiederholen!" . PHP_EOL;
+			echo "Eingabe ungültig (muss größer 0 sein), wiederholen!" . PHP_EOL;
 			goto repeat_votes;
 		} else {
 			$input[$party] = (int) $votes;
