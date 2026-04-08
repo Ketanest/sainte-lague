@@ -17,10 +17,13 @@ foreach($result as $party => $value){
 	$seats = $value['seats'];
 	$proportion = round($value['proportion'] * 100, 2);
 	$proportion_new = round($value['proportion_new'] * 100, 2);
+	$additional_text = "";
+	
 	if(isset($value['majority_seats'])){
-		$majority = ", davon " . $value['majority_seats'] . " Sitze aufgrund der Mehrheitsregel.";
-	}else $majority = "";
-	echo PHP_EOL . "$party hat $seats Sitze bekommen ($proportion % / $proportion_new % der Sitze)" . $majority . PHP_EOL;
+		$additional_text = ", davon " . $value['majority_seats'] . " Sitze aufgrund der Mehrheitsregel.";
+	} else if($proportion_new == 0) $additional_text = " - aufgrund der Prozenthürde rausgefallen";
+	
+	echo PHP_EOL . "$party hat $seats Sitze bekommen ($proportion % / $proportion_new % der Sitze)" . $additional_text . PHP_EOL;
 	$seatcount += $value['seats'];
 }
 
