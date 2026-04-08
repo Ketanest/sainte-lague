@@ -14,12 +14,12 @@ function input_votes(){
 		if($party == "") break;
 
 		repeat_votes:
-		$votes = readline("Stimmenanzahl: ");
+		$votes = (int) readline("Stimmenanzahl: ");
 		if($votes == ""){
 			echo "Keine Eingabe, wiederholen!" . PHP_EOL;
 			goto repeat_votes;
-		} else if(!is_int($votes) || $votes < 1){
-			echo "Eingabe ungültig (muss größer 0 sein), wiederholen!" . PHP_EOL;
+		} else if($votes < 1){
+			echo "Eingabe ungültig (muss eine Zahl größer 0 sein), wiederholen!" . PHP_EOL;
 			goto repeat_votes;
 		} else {
 			$input[$party] = (int) $votes;
