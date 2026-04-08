@@ -102,14 +102,14 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 		$assigned_seats = array_sum(array_column($seatcalc, 'seats'));
 		if($assigned_seats == $seats){
 			//increase seats if majority is set and seats not majority
-			if($majorityparty != false && $seatcalc[$majorityparty]['seats'] < (($seats / 2) + 1)){
+			if($majorityparty != false && $seatcalc[$majorityparty]['seats'] < ceil(($seats / 2) + 0.1)){
 				$seats += 1;
 			}else break;
 		}else if($assigned_seats > $seats){
 			echo "Divisor: " . $divisor += $divisor / 1000;
 		}else if($assigned_seats < $seats){
 			echo "Divisor: " . $divisor -= $divisor / 1000;
-		}else echo "irgenwo ist murks";
+		}
 		$calcround += 1;
 	}
 
