@@ -107,7 +107,10 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 					if($seatcalc[$majorityparty]['seats'] < ceil(($seats / 2) + 0.1)){
 						$seats += 1;
 						$seatcalc[$majorityparty]['seats'] += 1;
-					}else { break; }
+					}else{
+						echo "habbel";
+						break;
+					}
 				}
 			}else break;
 		}else if($assigned_seats > $seats){
