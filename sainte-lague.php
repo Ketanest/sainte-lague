@@ -5,12 +5,10 @@ include("functions.php");
 #$votes = input_votes();
 #$misc = input_misc();
 
-$votes = array("GRUEN" => 960478, "CSU" => 622986, "FDP" => 133257, "SPD" => 189327, "Linke" => 99634);
+$votes = array("GRUEN" => 990478, "CSU" => 622986, "FDP" => 133257, "SPD" => 189327, "Linke" => 99634);
 $result = calculate_seats($votes, 70, 5, 1);
 
 #$result = calculate_seats($votes, $misc['seats'], $misc['treshold'], $misc['majority']);
-
-print_r($result);
 
 $seatcount = 0;
 foreach($result as $party => $value){
