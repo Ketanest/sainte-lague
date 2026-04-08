@@ -18,7 +18,7 @@ function input_votes(){
 		if($votes == ""){
 			echo "Keine Eingabe, wiederholen!" . PHP_EOL;
 			goto repeat_votes;
-		} else if(!is_numeric($votes)){
+		} else if(!is_numeric($votes) || $votes < 1){
 			echo "Eingabe ist keine Zahl, wiederholen!" . PHP_EOL;
 			goto repeat_votes;
 		} else {
