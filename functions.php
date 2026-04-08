@@ -24,7 +24,7 @@ function input_votes(){
 		}
 	}
 
-	if(count($input) > 0) return $input; else goto return_empty;
+	if(count($input) > 0) return $input; else goto repeat_empty;
 }
 
 /*
