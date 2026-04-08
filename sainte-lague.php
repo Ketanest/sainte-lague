@@ -21,7 +21,7 @@ $votes = array(
 	"C" => 1000
 );
 
-$result = calculate_seats($votes, 630, 5, 1);
+$result = calculate_seats($votes, 630, 0, 0);
 
 #$result = calculate_seats($votes, $misc['seats'], $misc['treshold'], $misc['majority']);
 
