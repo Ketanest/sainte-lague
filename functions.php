@@ -1,7 +1,9 @@
 <?php
 /*
 fetches party and vote count (providing basic input check)
+
 returns array with partyname as key and votecount as value or NULL if array is empty
+
 break with empy party
 */
 function input_votes(){
@@ -32,6 +34,7 @@ fetches miscellaneous options (treshold, seats, majority)
 treshold (percent): integer between 0 and 100 (0 = off, 1-100 = percentage)
 seats (mandatory): integer seats in the parliament
 majority: bool if majority rule is applied
+
 returns array with treshold, seats and majority as key and corresponding values
 */
 function input_misc(){
@@ -58,6 +61,8 @@ function input_misc(){
 calculates seats proportionally
 treshold (optional, default: false): removes party not meeting the threshold
 majority (optional, default: false): more than 50 % of votes results mandatory in more than 50 % of the seats (increases seats if necessary)
+
+returns 2-dimensional array with [key1 = party][key2 = 'seats' and 'proportion']
 */
 function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority = 0){
 	//if treshold > 0 walk through array, remove any party below treshold and add removed party to temporary array
@@ -75,7 +80,6 @@ function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority =
 
 	/*
 	calculate seats
-	returns 2-dimensional array with [key1 = party][key2 = seats and proportion]
 	*/
 	$votesum = array_sum($votes);
 	echo "Start-Divisor: " . $divisor = $votesum / $seats;
