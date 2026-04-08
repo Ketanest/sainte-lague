@@ -67,14 +67,17 @@ returns 2-dimensional array with
 				'proportion_new' (decimal) => new proportion (treshold parties removed)
 */
 function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
-	//calculate proportionals and add to array
+	//calculate proportions and add to array
 	$seatcalc = array();
 	foreach($votes as $party => $votecount){
-		$sum = array_sum($votes);
-		$proportion = $votecount / $sum;
+		$votesum = array_sum($votes);
+		$proportion = $votecount / $votesum;
 		$seatcalc[$party]['proportion'] = $proportion;
-		//if treshold > 0 and party below treshold remove party from $votes
-		if($treshold > 0 && $proportion < ($treshold / 100)) unset($votes[$party];
+		//if treshold > 0 and party below treshold remove party from $votes and set seats to -1
+		if($treshold > 0 && $proportion < ($treshold / 100)){
+			unset($votes[$party]);
+			$seatcalc[$party]['seats'] = -1;
+		}
 	}
 	
 	/*
@@ -89,9 +92,9 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 		foreach($votes as $party => $votecount){
 			$seatcalc[$party]['seats'] = (int) round($votecount / $divisor);
 			if($calcround == 1){
-				//set proportion and majorityparty (if desired) only in the first run
-				$seatcalc[$party]['proportion'] = $votecount / $votesum;
-				if($seatcalc[$party]['proportion'] > 0.5 && $majority) $majorityparty = $party;
+				//set proportion_new and majorityparty (if desired) only in the first run
+				$seatcalc[$party]['proportion_new'] = $votecount / $votesum;
+				if($seatcalc[$party]['proportion_new'] > 0.5 && $majority) $majorityparty = $party;
 			}
 		}
 		//check if assigned seats differs from available seat number and increase/decrease divisor if necessary
@@ -107,12 +110,6 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 			echo "Divisor: " . $divisor -= $divisor / 1000;
 		}else echo "irgenwo ist murks";
 		$calcround += 1;
-	}
-
-	//add seats and proportion from treshold parties (temporaray array)
-	foreach($treshold_parties as $party => $proportion){
-		$seatcalc[$party]['seats'] = 0;
-		$seatcalc[$party]['proportion'] = $proportion;
 	}
 
 	return $seatcalc;
