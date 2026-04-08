@@ -107,7 +107,7 @@ function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority =
 		$calcround += 1;
 	}
 
-	//add seats and proportion from treshold parties
+	//add seats and proportion from treshold parties (temporaray array)
 	foreach($treshold_parties as $party => $proportion){
 		$seatcalc[$party]['seats'] = 0;
 		$seatcalc[$party]['proportion'] = $proportion;
