@@ -60,6 +60,7 @@ treshold (optional, default: false): removes party not meeting the threshold
 majority (optional, default: false): more than 50 % of votes results mandatory in more than 50 % of the seats (increases seats if necessary)
 */
 function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority = 0){
+	//if treshodl > 0 walk through array and remove any party below treshold
 	$treshold_parties = array();
 	if($treshold > 0){
 		$sum = array_sum($votes);
@@ -72,6 +73,7 @@ function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority =
 		}
 	}
 
+	//calculate seats
 	$votesum = array_sum($votes);
 	echo "Start-Divisor: " . $divisor = $votesum / $seats;
 	$majorityparty = false;
@@ -81,12 +83,14 @@ function calculate_seats($votes, $seats, (int) $treshold = 0, (bool) $majority =
 		foreach($votes as $party => $votecount){
 			$seatcalc[$party]['seats'] = (int) round($votecount / $divisor);
 			if($calcround == 1){
+				//set proportion and majorityparty (if desired) only in the first run
 				$seatcalc[$party]['proportion'] = $votecount / $votesum;
 				if($seatcalc[$party]['proportion'] > 0.5 && $majority) $majorityparty = $party;
 			}
 		}
 		$assigned_seats = array_sum(array_column($seatcalc, 'seats'));
 		if($assigned_seats == $seats){
+			//increase seats if majority (if desired) and seats not majority
 			if($majorityparty != false && $seatcalc[$majorityparty]['seats'] < ($seats / 2) + 1){
 				$seats += 1;
 			}else break;
