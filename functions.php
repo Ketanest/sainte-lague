@@ -43,7 +43,7 @@ function input_misc(){
 		goto repeat_treshold;
 	}
 
-	$input['majority'] = (bool) readline("Berücksichtigung der Mehrheitsklausel? (ja / NEIN) ");
+	$input['majority'] = (bool) readline("Berücksichtigung der Mehrheitsklausel? (ja / nein [standard]) ");
 
 	repeat_seats:
 	$input['seats'] = (int) readline("Wie viele Sitze sind zu vergeben (Ganze Zahl) ");
@@ -57,10 +57,14 @@ function input_misc(){
 
 /*
 calculates seats proportionally
-treshold (optional, default: false): removes party not meeting the threshold
+treshold (optional, default: false): removes party not reaching the threshold
 majority (optional, default: false): more than 50 % of votes results mandatory in more than 50 % of the seats (increases seats if necessary)
 
-returns 2-dimensional array with [key1 = party][key2 = 'seats' and 'proportion']
+returns 2-dimensional array with
+	key1 = party (string)
+		key2 =	'seats' (int) => -1 if threshold party 
+				'proportion' (decimal) => initial proportion (with treshold parties)
+				'proportion_new' (decimal) => new proportion (treshold parties removed)
 */
 function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 	//if treshold > 0 walk through array, remove any party below treshold and add removed party to temporary array
@@ -69,7 +73,7 @@ function calculate_seats($votes, $seats, $treshold = 0, $majority = 0){
 		$sum = array_sum($votes);
 		foreach($votes as $party => $votecount){
 			$proportion = $votecount / $sum;
-			if($proportion < $treshold / 100){
+			if($proportion < ($treshold / 100)){
 				$treshold_parties[$party] = $proportion;
 				unset($votes[$party]);
 			}
