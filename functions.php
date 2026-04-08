@@ -1,7 +1,8 @@
 <?php
 /*
-fetches party and vote of any number (providing basic input check)
+fetches party and vote count (providing basic input check)
 returns array with partyname as key and votecount as value or NULL if array is empty
+break with empy party
 */
 function input_votes(){
 	$input = array();
